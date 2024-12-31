@@ -18,7 +18,9 @@
     "@antv/x6-plugin-snapline": "^2.1.7",
     "@antv/x6-plugin-stencil": "^2.1.5",
     "@antv/x6-plugin-transform": "^2.1.8",
+    "@antv/x6-vue-shape": "^2.1.2",
     "@element-plus/icons-vue": "^2.3.1",
+    "ant-design-vue": "^4.2.6",
     "element-plus": "^2.9.1",
     "sass": "^1.83.0",
     "vue": "^3.5.13"
