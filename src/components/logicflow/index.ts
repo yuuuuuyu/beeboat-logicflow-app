@@ -3,11 +3,12 @@
  * @Author: (于智勇)zhiyong.yu@ytever.com
  * @Date: 2024-12-28 09:06:33
  * @LastEditors: (于智勇)zhiyong.yu@ytever.com
- * @LastEditTime: 2024-12-28 16:57:33
+ * @LastEditTime: 2024-12-29 17:54:15
  */
 import { Graph } from "@antv/x6"
 import UsePlugins from "./plugins/x6-plugin"
 import BtpStencil from "./plugins/x6-plugin/stencil"
+import BtpCustomNode from "./plugins/node/index"
 
 export default class BtpLogicFlow {
   private container: HTMLDivElement
@@ -44,6 +45,7 @@ export default class BtpLogicFlow {
 
     this.initGraph({ ...this.defaultOptions, ...options })
     this.initStencil({ container: this.stencilContainer, target: this.blf })
+    this.registerCustomNodes()
   }
   /**
    * 初始化画布
@@ -58,7 +60,15 @@ export default class BtpLogicFlow {
   }
   initStencil(options): void {
     console.log("--------------initStencil-start--------------")
-    new BtpStencil(options)
+    const stencil = new BtpStencil(options)
+    stencil.load([
+      {
+        shape: "custom-vue-node",
+        label: "自定义节点",
+        width: 100,
+        height: 40,
+      },
+    ])
     console.log("--------------initStencil-end----------------")
   }
 
@@ -91,6 +101,20 @@ export default class BtpLogicFlow {
   toJSON(options): Object {
     console.log("--------------toJSON--------------")
     return this.blf.toJSON(options)
+  }
+
+  /**
+   * 注册自定义节点
+   */
+  registerCustomNodes(): void {
+    BtpCustomNode.register()
+  }
+
+  /**
+   * 创建自定义节点
+   */
+  createCustomNode(type, options): void {
+    return BtpCustomNode.createNode(type, this.blf, options)
   }
 }
 
