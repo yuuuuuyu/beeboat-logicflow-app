@@ -3,10 +3,13 @@
  * @Author: (于智勇)zhiyong.yu@ytever.com
  * @Date: 2024-12-28 12:40:30
  * @LastEditors: (于智勇)zhiyong.yu@ytever.com
- * @LastEditTime: 2024-12-29 21:15:11
+ * @LastEditTime: 2025-01-01 21:37:40
  */
 import { Stencil } from "@antv/x6-plugin-stencil"
 import { Graph } from "@antv/x6"
+
+import BtpCustomNode from "../node/index"
+import { thumbProps } from "element-plus"
 
 export default class BtpStencil extends Stencil {
   private stencilContainer: HTMLDivElement
@@ -22,7 +25,10 @@ export default class BtpStencil extends Stencil {
     this.stencilContainer = container
     this.blf = target
 
+    // 初始化stencil面板
     this.initStencil()
+    // 初始化面板数据
+    this.initStencilData()
   }
   /**
    * 自定义节点面板
@@ -36,7 +42,7 @@ export default class BtpStencil extends Stencil {
   }
   initStencil(): void {
     this.stencil = new Stencil({
-      target: this.stencilContainer,
+      target: this.blf,
       stencilGraphWidth: 200,
       stencilGraphHeight: 800,
       collapsable: true,
@@ -53,6 +59,9 @@ export default class BtpStencil extends Stencil {
       },
     })
     this.stencilContainer.appendChild(this.stencil.container)
+  }
+  initStencilData(): void {
+    BtpCustomNode.createNode(this.blf, this.stencil)
   }
 
   load(nodes) {

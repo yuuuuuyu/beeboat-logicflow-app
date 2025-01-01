@@ -3,7 +3,7 @@
  * @Author: (于智勇)zhiyong.yu@ytever.com
  * @Date: 2024-12-28 09:06:33
  * @LastEditors: (于智勇)zhiyong.yu@ytever.com
- * @LastEditTime: 2024-12-29 17:54:15
+ * @LastEditTime: 2025-01-01 22:04:24
  */
 import { Graph } from "@antv/x6"
 import UsePlugins from "./plugins/x6-plugin"
@@ -35,6 +35,7 @@ export default class BtpLogicFlow {
     },
   }
   private data: Object
+
   public blf: Graph
 
   constructor(options, data: Object) {
@@ -43,9 +44,8 @@ export default class BtpLogicFlow {
     this.stencilContainer = stencilContainer
     this.data = data
 
-    this.initGraph({ ...this.defaultOptions, ...options })
+    this.initGraph({ ...this.defaultOptions, container })
     this.initStencil({ container: this.stencilContainer, target: this.blf })
-    this.registerCustomNodes()
   }
   /**
    * 初始化画布
@@ -54,21 +54,17 @@ export default class BtpLogicFlow {
   initGraph(options): void {
     console.log("--------------initGraph-start--------------")
     this.blf = new Graph(options)
+    // 加载数据
     this.fromJSON(this.data)
+    // 加载插件
     this.usePlugins(this.blf)
+    // 注册自定义节点
+    this.registerCustomNodes()
     console.log("--------------initGraph-end----------------")
   }
   initStencil(options): void {
     console.log("--------------initStencil-start--------------")
-    const stencil = new BtpStencil(options)
-    stencil.load([
-      {
-        shape: "custom-vue-node",
-        label: "自定义节点",
-        width: 100,
-        height: 40,
-      },
-    ])
+    new BtpStencil(options)
     console.log("--------------initStencil-end----------------")
   }
 

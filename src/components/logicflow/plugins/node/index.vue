@@ -1,29 +1,41 @@
-<!--
- * @Description: 自定义节点
- * @Author: (于智勇)zhiyong.yu@ytever.com
- * @Date: 2024-12-29 12:48:53
- * @LastEditors: (于智勇)zhiyong.yu@ytever.com
- * @LastEditTime: 2024-12-29 12:49:06
--->
-<template>
-  <div class="custom-node">
-    <h3>{{ title }}</h3>
-    <p>{{ description }}</p>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { ref } from "vue"
+import { useNodeBase } from "../hook/index"
 
-const title = ref("自定义节点标题")
-const description = ref("自定义节点描述")
+const { Graph, Node, data, selectedToClassName } = useNodeBase()
 </script>
 
+<template>
+  <div class="node-list-address" :class="selectedToClassName">
+    <div class="node-list-component-content" :style="data?.styles">
+      {{ data.label }}
+    </div>
+  </div>
+</template>
 <style scoped>
-.custom-node {
-  border: 1px solid #000;
-  padding: 10px;
-  background-color: #fff;
+.node-list-address {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.node-list-component-content {
+  background: #3fa579;
+  width: 100%;
+  height: 100%;
+  color: #333;
+  font-size: 14px;
+}
+.node-list-selected:after {
+  content: "Select";
+  position: absolute;
+  font-size: 12px;
+  line-height: 12px;
+  padding: 1px 2px 2px;
+  background: #fa6ba9;
+  border-radius: 5px;
+  top: -18px;
+  right: 4px;
+  color: #fff;
 }
 </style>
 

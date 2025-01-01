@@ -3,7 +3,7 @@
  * @Author: (于智勇)zhiyong.yu@ytever.com
  * @Date: 2024-12-28 08:32:49
  * @LastEditors: (于智勇)zhiyong.yu@ytever.com
- * @LastEditTime: 2024-12-29 21:14:31
+ * @LastEditTime: 2025-01-01 21:12:03
 -->
 <template>
   <el-drawer
@@ -20,7 +20,7 @@
       <div class="container">
         <div class="app-stencil" ref="stencilRef" />
         <div class="app-container" ref="blfRef"></div>
-        <teleport-container />
+        <TeleportContainer />
       </div>
     </template>
     <template #footer>
@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts" setup>
-import { nextTick, ref, watch } from "vue"
+import { nextTick, ref, watch, defineComponent } from "vue"
 import { ElMessageBox } from "element-plus"
 import type { DrawerProps } from "element-plus"
 import { Check, CopyDocument, DocumentAdd } from "@element-plus/icons-vue"
@@ -50,6 +50,12 @@ import BtpLogicFlow from "./index"
 // 用于自定义节点
 import { getTeleport } from "@antv/x6-vue-shape"
 const TeleportContainer = getTeleport()
+defineComponent({
+  name: "logicflow",
+  components: {
+    TeleportContainer,
+  },
+})
 
 const blfRef = ref<HTMLDivElement>()
 const stencilRef = ref<HTMLDivElement>()
