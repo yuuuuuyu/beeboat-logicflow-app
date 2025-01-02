@@ -1,24 +1,31 @@
+<!--
+ * @Description: 
+ * @Author: (于智勇)zhiyong.yu@ytever.com
+ * @Date: 2025-01-02 21:59:29
+ * @LastEditors: (于智勇)zhiyong.yu@ytever.com
+ * @LastEditTime: 2025-01-02 22:00:16
+-->
 <script setup lang="ts">
 import { useNodeBase } from "../hook/index"
 const { Graph, Node, data, selectedToClassName } = useNodeBase()
 </script>
-
 <template>
-  <div class="node-list-address" :class="selectedToClassName">
+  <div class="node-list-parent" :class="selectedToClassName">
     <div class="node-list-component-content" :style="data?.styles">
       {{ data.label }}
     </div>
   </div>
 </template>
 <style scoped>
-.node-list-address {
+.node-list-parent {
   width: 100%;
   height: 100%;
   pointer-events: none;
+  position: relative;
 }
 
 .node-list-component-content {
-  background: #3fa579;
+  background: #73b923;
   width: 100%;
   height: 100%;
   color: #333;

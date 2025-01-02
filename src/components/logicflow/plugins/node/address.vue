@@ -1,3 +1,10 @@
+<!--
+ * @Description: 
+ * @Author: (于智勇)zhiyong.yu@ytever.com
+ * @Date: 2025-01-02 21:59:29
+ * @LastEditors: (于智勇)zhiyong.yu@ytever.com
+ * @LastEditTime: 2025-01-02 22:00:08
+-->
 <script setup lang="ts">
 import { useNodeBase } from "../hook/index"
 const { Graph, Node, data, selectedToClassName } = useNodeBase()
@@ -10,6 +17,7 @@ const { Graph, Node, data, selectedToClassName } = useNodeBase()
     </div>
   </div>
 </template>
+
 <style scoped>
 .node-list-address {
   width: 100%;

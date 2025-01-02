@@ -4,21 +4,22 @@ const { Graph, Node, data, selectedToClassName } = useNodeBase()
 </script>
 
 <template>
-  <div class="node-list-address" :class="selectedToClassName">
+  <div class="node-list-box" :class="selectedToClassName">
     <div class="node-list-component-content" :style="data?.styles">
       {{ data.label }}
     </div>
   </div>
 </template>
+
 <style scoped>
-.node-list-address {
+.node-list-box {
   width: 100%;
   height: 100%;
   pointer-events: none;
 }
 
 .node-list-component-content {
-  background: #3fa579;
+  background: #1e9cef;
   width: 100%;
   height: 100%;
   color: #333;

@@ -3,7 +3,7 @@
  * @Author: (于智勇)zhiyong.yu@ytever.com
  * @Date: 2024-12-28 08:32:49
  * @LastEditors: (于智勇)zhiyong.yu@ytever.com
- * @LastEditTime: 2025-01-01 21:12:03
+ * @LastEditTime: 2025-01-02 22:08:50
 -->
 <template>
   <el-drawer
@@ -20,8 +20,8 @@
       <div class="container">
         <div class="app-stencil" ref="stencilRef" />
         <div class="app-container" ref="blfRef"></div>
-        <TeleportContainer />
       </div>
+      <TeleportContainer />
     </template>
     <template #footer>
       <div style="flex: auto">
@@ -50,12 +50,6 @@ import BtpLogicFlow from "./index"
 // 用于自定义节点
 import { getTeleport } from "@antv/x6-vue-shape"
 const TeleportContainer = getTeleport()
-defineComponent({
-  name: "logicflow",
-  components: {
-    TeleportContainer,
-  },
-})
 
 const blfRef = ref<HTMLDivElement>()
 const stencilRef = ref<HTMLDivElement>()

@@ -3,7 +3,7 @@
  * @Author: (于智勇)zhiyong.yu@ytever.com
  * @Date: 2024-12-28 12:40:30
  * @LastEditors: (于智勇)zhiyong.yu@ytever.com
- * @LastEditTime: 2025-01-02 21:21:39
+ * @LastEditTime: 2025-01-02 22:30:02
  */
 import { Stencil } from "@antv/x6-plugin-stencil"
 import { Graph } from "@antv/x6"
@@ -52,20 +52,25 @@ export default class BtpStencil extends Stencil {
   initStencil(): void {
     this.stencil = new Stencil({
       target: this.blf,
-      stencilGraphWidth: 200,
-      stencilGraphHeight: 800,
-      collapsable: true,
-      groups: [
-        {
-          name: "group1",
-          title: "Group 1",
-        },
-      ],
+      title: "自定义的菜单以及节点",
+      stencilGraphWidth: 260,
+      stencilGraphHeight: 0,
+      stencilGraphPadding: 0,
+      collapsable: false,
       layoutOptions: {
         columns: 1,
-        columnWidth: 100,
-        rowHeight: 40,
+        dx: 0,
+        dy: 5,
+        columnWidth: "compact",
+        rowHeight: "compact",
       },
+      groups: [
+        {
+          title: "基础流程图",
+          name: "group1",
+          collapsable: false,
+        },
+      ],
     })
     this.stencilContainer.appendChild(this.stencil.container)
   }
