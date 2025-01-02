@@ -1,14 +1,16 @@
+import { register } from "@antv/x6-vue-shape"
 /*
  * @Description: 基于antv/x6的逻辑编排图
  * @Author: (于智勇)zhiyong.yu@ytever.com
  * @Date: 2024-12-28 09:06:33
  * @LastEditors: (于智勇)zhiyong.yu@ytever.com
- * @LastEditTime: 2025-01-01 22:04:24
+ * @LastEditTime: 2025-01-02 21:18:02
  */
 import { Graph } from "@antv/x6"
 import UsePlugins from "./plugins/x6-plugin"
 import BtpStencil from "./plugins/x6-plugin/stencil"
 import BtpCustomNode from "./plugins/node/index"
+import type { Stencil } from "@antv/x6-plugin-stencil"
 
 export default class BtpLogicFlow {
   private container: HTMLDivElement
@@ -36,7 +38,11 @@ export default class BtpLogicFlow {
   }
   private data: Object
 
+  // btplogicflow
   public blf: Graph
+  // btpcustomnode
+  public bcn: BtpCustomNode
+  public stencil: Stencil
 
   constructor(options, data: Object) {
     let { container, stencilContainer } = options
@@ -45,7 +51,11 @@ export default class BtpLogicFlow {
     this.data = data
 
     this.initGraph({ ...this.defaultOptions, container })
-    this.initStencil({ container: this.stencilContainer, target: this.blf })
+    this.initStencil({
+      container: this.stencilContainer,
+      target: this.blf,
+      nodeInstance: this.bcn,
+    })
   }
   /**
    * 初始化画布
@@ -59,12 +69,12 @@ export default class BtpLogicFlow {
     // 加载插件
     this.usePlugins(this.blf)
     // 注册自定义节点
-    this.registerCustomNodes()
+    // this.bcn.register()
     console.log("--------------initGraph-end----------------")
   }
   initStencil(options): void {
     console.log("--------------initStencil-start--------------")
-    new BtpStencil(options)
+    this.stencil = new BtpStencil(options)
     console.log("--------------initStencil-end----------------")
   }
 
@@ -80,7 +90,10 @@ export default class BtpLogicFlow {
    */
   usePlugins(blf: Graph) {
     console.log("--------------usePlugins-start--------------")
+    // 常规配置插件
     new UsePlugins(blf)
+    // 实例化自定义节点并注册
+    this.bcn = new BtpCustomNode(blf)
     console.log("--------------usePlugins-end----------------")
   }
 
@@ -97,20 +110,6 @@ export default class BtpLogicFlow {
   toJSON(options): Object {
     console.log("--------------toJSON--------------")
     return this.blf.toJSON(options)
-  }
-
-  /**
-   * 注册自定义节点
-   */
-  registerCustomNodes(): void {
-    BtpCustomNode.register()
-  }
-
-  /**
-   * 创建自定义节点
-   */
-  createCustomNode(type, options): void {
-    return BtpCustomNode.createNode(type, this.blf, options)
   }
 }
 

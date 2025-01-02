@@ -1,9 +1,9 @@
 /*
- * @Description:
+ * @Description: Dnd面板扩展Stencil
  * @Author: (于智勇)zhiyong.yu@ytever.com
  * @Date: 2024-12-28 12:40:30
  * @LastEditors: (于智勇)zhiyong.yu@ytever.com
- * @LastEditTime: 2025-01-01 21:37:40
+ * @LastEditTime: 2025-01-02 21:21:39
  */
 import { Stencil } from "@antv/x6-plugin-stencil"
 import { Graph } from "@antv/x6"
@@ -14,32 +14,41 @@ import { thumbProps } from "element-plus"
 export default class BtpStencil extends Stencil {
   private stencilContainer: HTMLDivElement
   private options: Object
+  // 画布
   private blf: Graph
   private stencil: Stencil
+  // 自定义节点实例
+  private bcn: BtpCustomNode
 
+  public defaultAttrs: Object = {
+    label: "",
+    attrs: {
+      body: {
+        stroke: "#8f8f8f",
+        strokeWidth: 1,
+        fill: "#fff",
+        rx: 6,
+        ry: 6,
+      },
+    },
+  }
   constructor(options) {
     super(options)
     this.options = options
 
-    let { container, target } = options
+    let { container, target, nodeInstance } = options
     this.stencilContainer = container
     this.blf = target
+    this.bcn = nodeInstance
 
     // 初始化stencil面板
     this.initStencil()
     // 初始化面板数据
     this.initStencilData()
+    // 加载面板数据
+    this.loadStencilData()
   }
-  /**
-   * 自定义节点面板
-   */
-  commonAttrs = {
-    body: {
-      fill: "#fff",
-      stroke: "#8f8f8f",
-      strokeWidth: 1,
-    },
-  }
+
   initStencil(): void {
     this.stencil = new Stencil({
       target: this.blf,
@@ -61,11 +70,10 @@ export default class BtpStencil extends Stencil {
     this.stencilContainer.appendChild(this.stencil.container)
   }
   initStencilData(): void {
-    BtpCustomNode.createNode(this.blf, this.stencil)
+    this.bcn.createNode()
   }
-
-  load(nodes) {
-    this.stencil.load(nodes, "group1")
+  loadStencilData(): void {
+    this.bcn.loadNode(this.stencil)
   }
 }
 
