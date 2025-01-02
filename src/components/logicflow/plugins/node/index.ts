@@ -3,7 +3,7 @@
  * @Author: (于智勇)zhiyong.yu@ytever.com
  * @Date: 2024-12-29 12:50:12
  * @LastEditors: (于智勇)zhiyong.yu@ytever.com
- * @LastEditTime: 2025-01-02 21:27:32
+ * @LastEditTime: 2025-01-02 21:40:11
  */
 import { register, getTeleport } from "@antv/x6-vue-shape"
 import { Stencil } from "@antv/x6-plugin-stencil"
@@ -21,8 +21,6 @@ export default class BtpCustomNode {
   }
 
   register() {
-    console.log(1111111)
-
     register({
       shape: "custom-vue-node",
       width: 240,
@@ -33,7 +31,6 @@ export default class BtpCustomNode {
 
   private node: Node
   createNode() {
-    console.log(22222)
     this.node = this.blf.createNode({
       shape: "custom-vue-node",
       data: {
