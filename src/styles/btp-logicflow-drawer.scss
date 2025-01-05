@@ -25,13 +25,25 @@
                 height: 100%;
 
                 .x6-widget-transform {
-                    // border: none;
-                    // border: 1px solid #000;
+                    border: none;
+                    border: 2px solid #5B84F2;
+                    // margin: 0;
+                    margin-top: -2px;
+                    margin-left: -2px;
+                    padding: 0;
+
+                    .x6-widget-transform-resize {
+                        width: 8px;
+                        height: 8px;
+                        border-color: #5B84F2;
+                    }
                 }
 
                 .x6-widget-selection-box {
-                    // border: none;
-                    // box-shadow: none;
+                    border: none;
+                    box-shadow: none;
+                    margin: 0;
+                    padding: 0;
                 }
             }
 

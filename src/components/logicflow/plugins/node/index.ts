@@ -3,7 +3,7 @@
  * @Author: (于智勇)zhiyong.yu@ytever.com
  * @Date: 2024-12-29 12:50:12
  * @LastEditors: (于智勇)zhiyong.yu@ytever.com
- * @LastEditTime: 2025-01-02 22:44:23
+ * @LastEditTime: 2025-01-03 17:07:52
  */
 import { register, getTeleport } from "@antv/x6-vue-shape"
 import { Stencil } from "@antv/x6-plugin-stencil"
@@ -38,8 +38,8 @@ export default class BtpCustomNode {
     })
     register({
       shape: "custom-parent",
-      width: 260,
-      height: 32,
+      width: 200,
+      height: 50,
       component: parent,
     })
   }
