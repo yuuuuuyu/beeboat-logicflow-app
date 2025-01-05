@@ -3,7 +3,7 @@
  * @Author: (于智勇)zhiyong.yu@ytever.com
  * @Date: 2025-01-02 21:59:29
  * @LastEditors: (于智勇)zhiyong.yu@ytever.com
- * @LastEditTime: 2025-01-03 17:49:34
+ * @LastEditTime: 2025-01-05 21:27:26
 -->
 <template>
   <!-- <div class="node-list-parent" :class="selectedToClassName">
@@ -15,7 +15,19 @@
     <div class="node-item__icon"></div>
     <div class="node-item__name">变量赋值</div>
     <div class="node-item__tips"></div>
-    <div class="node-item__option"></div>
+
+    <el-dropdown trigger="click" placement="top" style="z-index: 99999">
+      <span class="el-dropdown-link">
+        <div class="node-item__option"></div>
+      </span>
+      <template #dropdown>
+        <el-dropdown-menu>
+          <el-dropdown-item>预览</el-dropdown-item>
+          <el-dropdown-item divided>编辑</el-dropdown-item>
+          <el-dropdown-item>删除</el-dropdown-item>
+        </el-dropdown-menu>
+      </template>
+    </el-dropdown>
   </div>
 </template>
 <script setup lang="ts">

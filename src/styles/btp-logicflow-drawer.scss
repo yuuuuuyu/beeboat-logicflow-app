@@ -31,6 +31,7 @@
                     margin-top: -2px;
                     margin-left: -2px;
                     padding: 0;
+                    z-index: 0;
 
                     .x6-widget-transform-resize {
                         width: 8px;
@@ -44,6 +45,7 @@
                     box-shadow: none;
                     margin: 0;
                     padding: 0;
+                    pointer-events: none !important;
                 }
             }
 
