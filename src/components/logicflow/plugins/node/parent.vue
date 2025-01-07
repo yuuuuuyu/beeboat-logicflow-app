@@ -3,7 +3,7 @@
  * @Author: (于智勇)zhiyong.yu@ytever.com
  * @Date: 2025-01-02 21:59:29
  * @LastEditors: (于智勇)zhiyong.yu@ytever.com
- * @LastEditTime: 2025-01-05 21:27:26
+ * @LastEditTime: 2025-01-06 19:51:57
 -->
 <template>
   <!-- <div class="node-list-parent" :class="selectedToClassName">
@@ -15,7 +15,7 @@
     <div class="node-item__icon"></div>
     <div class="node-item__name">变量赋值</div>
     <div class="node-item__tips"></div>
-
+    <div class="node-item__add">1</div>
     <el-dropdown trigger="click" placement="top" style="z-index: 99999">
       <span class="el-dropdown-link">
         <div class="node-item__option"></div>
@@ -51,6 +51,7 @@ const openOption = e => {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  position: relative;
   .node-item__icon {
     width: 34px;
     height: 34px;
@@ -85,6 +86,23 @@ const openOption = e => {
     cursor: pointer;
     background: url("https://mdn.alipayobjects.com/huamei_f4t1bn/afts/img/A*tFw7SIy-ttQAAAAAAAAAAAAADtOHAQ/original")
       no-repeat center center / 100% 100%;
+  }
+  .node-item__add {
+    display: none;
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-15px);
+    transition: all ease-in-out 0.5s;
+  }
+  &:hover {
+    .node-item__add {
+      display: block;
+      transition: all ease-in-out 0.5s;
+    }
   }
 }
 

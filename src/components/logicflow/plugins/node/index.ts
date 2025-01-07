@@ -3,7 +3,7 @@
  * @Author: (于智勇)zhiyong.yu@ytever.com
  * @Date: 2024-12-29 12:50:12
  * @LastEditors: (于智勇)zhiyong.yu@ytever.com
- * @LastEditTime: 2025-01-03 17:07:52
+ * @LastEditTime: 2025-01-06 20:18:20
  */
 import { register, getTeleport } from "@antv/x6-vue-shape"
 import { Stencil } from "@antv/x6-plugin-stencil"
@@ -41,6 +41,41 @@ export default class BtpCustomNode {
       width: 200,
       height: 50,
       component: parent,
+      ports: {
+        groups: {
+          in: {
+            position: "left",
+            attrs: {
+              circle: {
+                r: 4,
+                magnet: true,
+                stroke: "transparent",
+                strokeWidth: 1,
+                fill: "transparent",
+              },
+            },
+          },
+
+          out: {
+            position: {
+              name: "right",
+              args: {
+                dx: -32,
+              },
+            },
+
+            attrs: {
+              circle: {
+                r: 4,
+                magnet: true,
+                stroke: "transparent",
+                strokeWidth: 1,
+                fill: "transparent",
+              },
+            },
+          },
+        },
+      },
     })
   }
 
@@ -84,6 +119,45 @@ export default class BtpCustomNode {
 
   loadNode(stencil: Stencil) {
     stencil.load(this.node, "group1")
+  }
+
+  /**
+   * 根据起点初始下游节点的位置信息
+   * @param node 起始节点
+   * @param graph
+   * @returns
+   */
+  getDownstreamNodePosition(node: Node, graph: Graph, dx = 250, dy = 100) {
+    // 找出画布中以该起始节点为起点的相关边的终点id集合
+    const downstreamNodeIdList: string[] = []
+    graph.getEdges().forEach(edge => {
+      const originEdge = edge.toJSON()?.data
+      if (originEdge.source === node.id) {
+        downstreamNodeIdList.push(originEdge.target)
+      }
+    })
+    // 获取起点的位置信息
+    const position = node.getPosition()
+    let minX = Infinity
+    let maxY = -Infinity
+    graph.getNodes().forEach(graphNode => {
+      if (downstreamNodeIdList.indexOf(graphNode.id) > -1) {
+        const nodePosition = graphNode.getPosition()
+        // 找到所有节点中最左侧的节点的x坐标
+        if (nodePosition.x < minX) {
+          minX = nodePosition.x
+        }
+        // 找到所有节点中最x下方的节点的y坐标
+        if (nodePosition.y > maxY) {
+          maxY = nodePosition.y
+        }
+      }
+    })
+
+    return {
+      x: minX !== Infinity ? minX : position.x + dx,
+      y: maxY !== -Infinity ? maxY + dy : position.y,
+    }
   }
 }
 
